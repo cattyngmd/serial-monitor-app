@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// for some reason jSensors is not able to get
+// cpu usage info on my arch linux laptop
+// so i just made this for demo
 public final class LinuxCpuFetcher extends AbstractCpuLoadFetcher {
     private final List<CpuStat> lastStats = new ArrayList<>();
 
