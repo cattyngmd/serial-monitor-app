@@ -12,9 +12,8 @@ public class Managers {
     private static ConfigManager config;
 
     public static void init() {
-        Globals.LOGGER.info("Preparing managers.");
+        Globals.LOGGER.info("Initializing core managers.");
         config = new ConfigManager();
-        config.save();
         system = new SystemManager();
         Globals.LOGGER.info("Initialization complete!");
     }

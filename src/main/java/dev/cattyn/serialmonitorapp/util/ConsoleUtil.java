@@ -1,11 +1,11 @@
 package dev.cattyn.serialmonitorapp.util;
 
 import com.profesorfalken.jsensors.util.OSDetector;
-import lombok.experimental.ExtensionMethod;
 import lombok.experimental.UtilityClass;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
@@ -31,6 +31,19 @@ public class ConsoleUtil {
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String scan() {
+        return new Scanner(System.in).nextLine();
+    }
+
+    public String scanSingle() {
+        return new Scanner(System.in).next();
+    }
+
+    public boolean scanYes() {
+        char c = scanSingle().charAt(0);
+        return Character.toLowerCase(c) == 'y';
     }
 
     private String[] getClearCommand() {
