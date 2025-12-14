@@ -2,17 +2,15 @@ package dev.cattyn.serialmonitorapp.manager;
 
 import dev.cattyn.serialmonitorapp.Globals;
 import dev.cattyn.serialmonitorapp.manager.impl.SystemManager;
+import lombok.Getter;
 
 public class Managers {
-    private static SystemManager SYSTEM;
-
-    public static SystemManager getSystem() {
-        return SYSTEM;
-    }
+    @Getter
+    private static SystemManager system;
 
     public static void init() {
         Globals.LOGGER.info("Preparing managers.");
-        SYSTEM = new SystemManager();
+        system = new SystemManager();
 
         Globals.LOGGER.info("Initialization complete!");
     }

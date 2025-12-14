@@ -14,6 +14,9 @@ repositories {
 dependencies {
     implementation("com.fazecast:jSerialComm:[2.0.0,3.0.0)")
     implementation("com.profesorfalken:jSensors:2.2.1")
+
+    compileOnly("org.projectlombok:lombok:1.18.42")
+    annotationProcessor("org.projectlombok:lombok:1.18.42")
 }
 
 application {
