@@ -20,7 +20,7 @@ public final class ConfigManager implements ConfigFactory {
     private final ConfigIniParser parser = new ConfigIniParser(configurations);
 
     private final Config<Integer> baud = integer("baud", 38400);
-    private final Config<Integer> port = integer("port", 1);
+    private final Config<Integer> port = integer("port", 0);
 
     public ConfigManager() {
         configurations.sort(Comparator.comparing(Config::getName));
