@@ -1,4 +1,4 @@
-package dev.cattyn.serialmonitorapp.manager.impl;
+package dev.cattyn.serialmonitorapp.manager.system;
 
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
