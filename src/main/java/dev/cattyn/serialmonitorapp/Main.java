@@ -6,6 +6,7 @@ import dev.cattyn.serialmonitorapp.manager.configs.ConfigManager;
 import dev.cattyn.serialmonitorapp.util.ConsoleUtil;
 import dev.cattyn.serialmonitorapp.util.SerialOutputStream;
 import lombok.Cleanup;
+import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,13 +15,21 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 public final class Main implements Globals {
+    @SneakyThrows
     public void launch() {
         ConsoleUtil.prepare(LOGGER);
         Managers.init();
         prepareConfig();
 
         SerialPort devicePort = SerialPort.getCommPorts()[Managers.getConfig().getPort().get()];
-        startSerialPort(devicePort);
+        while (!Thread.interrupted()) {
+            try {
+                startSerialPort(devicePort);
+            } catch (Exception e) {
+                LOGGER.severe("Error occurred, restarting service in 5 seconds.");
+                Thread.sleep(5000);
+            }
+        }
     }
 
     private void prepareConfig() {
@@ -64,15 +73,13 @@ public final class Main implements Globals {
         Managers.getConfig().getPort().set(devicePort);
     }
 
-    private static void startSerialPort(SerialPort devicePort) {
+    private static void startSerialPort(SerialPort devicePort) throws Exception {
         devicePort.openPort();
         devicePort.setBaudRate(38400);
         devicePort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 5000, 0);
 
         try {
             handleSerialConnection(devicePort);
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             devicePort.closePort();
         }
